@@ -141,7 +141,9 @@ class Extractor
 		$metadata->width = ($exif->getWidth() !== false) ? (int) $exif->getWidth() : 0;
 		$metadata->height = ($exif->getHeight() !== false) ? (int) $exif->getHeight() : 0;
 		$metadata->title = ($exif->getTitle() !== false) ? $exif->getTitle() : null;
-		$metadata->description = ($exif->getDescription() !== false) ? $exif->getDescription() : null;
+		//$metadata->description = ($exif->getDescription() !== false) ? $exif->getDescription() : null;
+		$metadata->description = array_key_exists('parameters', $exif->getRawData()) ? $exif->getRawData()['parameters'] : null;
+		$metadata->description = array_key_exists('prompt', $exif->getRawData()) ? $exif->getRawData()['prompt'] : $metadata->description;
 		$metadata->orientation = ($exif->getOrientation() !== false) ? (int) $exif->getOrientation() : 1;
 		$metadata->iso = ($exif->getIso() !== false) ? $exif->getIso() : null;
 		$metadata->make = ($exif->getMake() !== false) ? $exif->getMake() : null;
